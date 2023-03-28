@@ -1,5 +1,6 @@
 import React from "react";
 import { ethers } from "ethers";
+import '../../types/custom.d.ts';
 import counterABI from "../../assets/abi/SimpleCounter.json";
 import { GelatoRelay, CallWithSyncFeeRequest } from "@gelatonetwork/relay-sdk";
 
@@ -43,7 +44,7 @@ const CounterRelayApp = (props: CounterRelayAppProps) => {
     const relay = new GelatoRelay();
 
     // connecting to contract through front-end provider
-    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(target, counterABI.abi, signer);
 
@@ -137,7 +138,7 @@ const CounterRelayApp = (props: CounterRelayAppProps) => {
               className="link"
             >
               {" "}
-              {isLoading ? "Loading..." : counterValue}{" "}
+              {isLoading ? "Click below to grab the value" : counterValue}{" "}
             </a>
             <button className="btn btn-primary mt-4" onClick={getContractState}> Get Counter Value </button>
           </div>
